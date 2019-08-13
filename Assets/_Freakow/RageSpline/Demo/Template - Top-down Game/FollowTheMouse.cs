@@ -2,21 +2,20 @@ using UnityEngine;
 using System.Collections;
 
 public class FollowTheMouse : MonoBehaviour {
-
     public float maxSpeed;
     public float moveSpeed;
     public float turnSpeed;
-    public float origParticleMinSize;
-    public float origParticleMaxSize;
-    public float origParticleLocalYSpeed;
-    public ParticleEmitter emitter;
+    //public float origParticleMinSize;
+    //public float origParticleMaxSize;
+    //public float origParticleLocalYSpeed;
+    //public ParticleEmitter emitter;
 
 	// Use this for initialization
-	void Start () {
-        origParticleMinSize = emitter.minSize;
-        origParticleMaxSize = emitter.maxSize;
-        origParticleLocalYSpeed = emitter.localVelocity.y;
-	}
+	//void Start () {
+ //       origParticleMinSize = emitter.minSize;
+ //       origParticleMaxSize = emitter.maxSize;
+ //       origParticleLocalYSpeed = emitter.localVelocity.y;
+	//}
 	
 	// Update is called once per frame
 	void Update () {
@@ -40,8 +39,8 @@ public class FollowTheMouse : MonoBehaviour {
             GetComponent<Rigidbody>().velocity = GetComponent<Rigidbody>().velocity.normalized * maxSpeed;
         }
 
-        emitter.minSize = origParticleMinSize * (GetComponent<Rigidbody>().velocity.magnitude / maxSpeed);
-        emitter.maxSize = origParticleMaxSize * (GetComponent<Rigidbody>().velocity.magnitude / maxSpeed);
-        emitter.localVelocity = new Vector3(0f, origParticleLocalYSpeed * (GetComponent<Rigidbody>().velocity.magnitude / maxSpeed), 0f);
+        //emitter.minSize = origParticleMinSize * (GetComponent<Rigidbody>().velocity.magnitude / maxSpeed);
+        //emitter.maxSize = origParticleMaxSize * (GetComponent<Rigidbody>().velocity.magnitude / maxSpeed);
+        //emitter.localVelocity = new Vector3(0f, origParticleLocalYSpeed * (GetComponent<Rigidbody>().velocity.magnitude / maxSpeed), 0f);
 	}
 }
