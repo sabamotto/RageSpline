@@ -4,7 +4,7 @@ Scalable Vector Graphics creation and drawing component for Unity
 	## Current Version: 1.7 - Now Open Source! (LGPLv3 license)
 		License: https://www.gnu.org/licenses/lgpl-3.0.txt
 		Feel free to submit Pull Requests to our GitHub: https://github.com/Freakow/RageSpline.git
-	⋅⋅⋅ Unity 2017 compatible
+	⋅⋅⋅ Unity 2019 compatible
 	⋅⋅⋅ PhysicsGameTemplate demo scene updated to use Unity2D Physics (RageSpline Polygon Physics mode)
 
 	## Quickstart:
