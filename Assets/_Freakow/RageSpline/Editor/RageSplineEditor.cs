@@ -13,13 +13,13 @@ public class RageSplineEditor : Editor {
     private SerializedObject sRageSpline;
     //private SerializedProperty sStyle;
     [SerializeField] private static bool displayOptions;
-    [SerializeField] private static bool physicsOptions = false;
+    [SerializeField] private static bool physicsOptions;
     [SerializeField] private static bool stylingOptions;
     [SerializeField] private int _currentVertexCount;
     [SerializeField] private int _currentVertexDensity;
     private bool _dragSegmentShortcutPressed;
     private int _dragSegmentNearestIdx;
-    private static GUIStyle hiliteStyle = new GUIStyle();
+    private static readonly GUIStyle hiliteStyle = new GUIStyle();
 
     public void OnEnable() {
         sRageSpline = new SerializedObject(target);
@@ -485,7 +485,7 @@ public class RageSplineEditor : Editor {
     }
 
     public void OnSceneGUI() {
-        DisconnectFromRageSplineBasicPrefabs();
+        UnpackRageSplineBasicPrefabs();
         bool mouseDrag = false;
         bool mouseUp = false;
         bool keyUp = false;
@@ -921,18 +921,21 @@ public class RageSplineEditor : Editor {
         return new Vector3(val.x, val.y);
     }
 
-    public void DisconnectFromRageSplineBasicPrefabs() {
+    public void UnpackRageSplineBasicPrefabs() {
         GameObject go = ((RageSpline)target).gameObject;
-        if (go == null) return;
+        if (go == null || !PrefabUtility.IsPartOfAnyPrefab(go)) return;
 
-        switch (go.name) {
+        var original = PrefabUtility.GetCorrespondingObjectFromOriginalSource(go);
+        // TODO: Add basic shape flag into RageSpline component, and judge here.
+        switch (original.name) {
             case ("Blob"):
             case ("Circle"):
+            case ("Diamond"):
             case ("Line"):
             case ("MultitextureLandscape"):
             case ("Rectangle"):
             case ("Triangle"):
-                PrefabUtility.DisconnectPrefabInstance(go);
+                PrefabUtility.UnpackPrefabInstance(go, PrefabUnpackMode.OutermostRoot, InteractionMode.AutomatedAction);
                 break;
         }
     }
